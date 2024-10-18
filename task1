@@ -1,0 +1,76 @@
+/*This task is based on the LibraryManagementSystem*/
+
+import java.util.Scanner;
+
+class Library {
+    private int totalBooks;
+    private int issuedBooks;
+
+    public Library(int totalBooks) {
+        this.totalBooks = totalBooks;
+        this.issuedBooks = 0;
+    }
+
+    public void issueBook() {
+        if (issuedBooks < totalBooks) {
+            issuedBooks++;
+            System.out.println("Book issued successfully.");
+        } else {
+            System.out.println("No books available to issue.");
+        }
+    }
+
+    public void returnBook() {
+        if (issuedBooks > 0) {
+            issuedBooks--;
+            System.out.println("Book returned successfully.");
+        } else {
+            System.out.println("No books to return.");
+        }
+    }
+
+    public void displayStatus() {
+        System.out.println("Total Books: " + totalBooks);
+        System.out.println("Issued Books: " + issuedBooks);
+        System.out.println("Available Books: " + (totalBooks - issuedBooks));
+    }
+}
+
+public class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter total number of books in the library: ");
+        int totalBooks = scanner.nextInt();
+
+        Library library = new Library(totalBooks);
+        int choice;
+
+        do {
+            System.out.println("\n1. Issue Book");
+            System.out.println("2. Return Book");
+            System.out.println("3. Display Status");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    library.issueBook();
+                    break;
+                case 2:
+                    library.returnBook();
+                    break;
+                case 3:
+                    library.displayStatus();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        } while (choice != 4);
+
+        scanner.close();
+    }
+}
